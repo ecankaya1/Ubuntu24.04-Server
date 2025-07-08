@@ -78,6 +78,60 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 - To log out of the server, type 'exit'. <br>
 
+## Updates
+
+- Making sure the server is up to date is important for security. This can be done by typing 'sudo apt update' (as this is an administrative command, a password will need to be typed in). <br>
+
+![Apt Update](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Sudo%20Apt%20Update.png)
+
+- Once updated, run the command 'sudo apt upgrade'. <br>
+- After running an update, you may want to restart the server which can be done by typing 'sudo reboot'. <br>
+
+## Automatic Updates
+
+- Rather than manually doing updates everytime, you can get the server to automatically do it for you. <br>
+- First, check the unattended upgrades package is installed by typing 'sudo apt install unattended-upgrades' (this package should be installed by default). <br>
+
+![UnattendedUpgrades](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Automatic%20Updates.png)
+
+- As part of the automation process, it can be useful for the server to restart itself to complete the upgrade procedure, to do this, another package has to be installed, by typing 'sudo apt install update-notifier-common'. <br>
+
+![UpdateNotifierCommon](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Automatic%20Updates%20Auto%20Restart.png)
+
+- Next, check the configuration in the APT's config directory. (Advanced Package Tool is a tool for handling the installation & removal of software). do this by typing 'cd /etc/apt/apt.conf.d'. (You can see that you're in the APT directory as the command prompt has changed). <br>
+- List the contents of the directory by typing 'ls'. <br>
+
+![APTdirectory](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20APT%20directory.png)
+
+- 2 files that need to be edited in here, the first is '50unattended-upgrades'. <br>
+- Open this file in the nano text editor by typing 'sudo nano 50unattended-upgrades'. <br>
+
+### 3 parts to check in this file:
+
+- In the 'Allowed-Origins' section, check the 3 lines highlighted yellow in the image below aren't commented out. If they were, they would have 2 forward slashes at the start of the line '//', if that is the case, remove the forward slashes. Removing the forward slashes here means security updates will be applied automatically. <br>
+
+![AllowedOrigins](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Allowed%20Origins.png)
+
+- Next, head to the 'Automatic-Reboot' section, this can be found quickly using the search function. Hit 'CTRL-W' & in the search bar type 'automatic-reboot' then hit enter. Remove the forward slashes to uncomment the code & replace 'false' to 'true'. The server has now been told to restart automatically following an unattended upgrade. (The first image below shows you what it will look like upon getting to the code, the next image is the edited code). <br>
+
+![AutoReboot](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Automatic-Reboot.png)
+
+![AutoRebootEdited](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Automatic-Reboot%20corrected.png)
+
+- Thirdly, go to the 'Automatic-Reboot-Time' just below the previous section. Uncomment the code here & change the time for whatever is best for you. (In the real world in should be set to a time where the least users will be active, in my example I set it to 1AM). <br>
+
+![AutoTime](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Auto%20Reboot%20Time.png)
+
+![AutoTimeEdited](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Auto%20Reboot%20Time%20corrected.png)
+
+- To save these changes in nano editor, hit 'CTRL+X' then type 'y' & hit enter. <br>
+
+
+
+
+
+
+
 
 
  
