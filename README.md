@@ -105,7 +105,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 - There are 2 files that need to be edited here. <br>
 
-### File 1:
+### *File 1:*
 
 - The first file is '50unattended-upgrades'. Open this file in the nano text editor by typing 'sudo nano 50unattended-upgrades'. <br>
 
@@ -127,7 +127,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 - To save these changes in nano editor, hit 'CTRL+X' then type 'y' & hit enter. <br>
 
-### File 2:
+### *File 2:*
 
 - The second file to check is: '20auto-upgrades'. <br>
 
@@ -169,17 +169,111 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ![OpenSSH-client](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20Windows11.png)
 
-### Port Forwarding
+### *Port Forwarding*
 
 - As I am using VirtualBox to run a VM of the Ubuntu server, some extra steps are needed. Open the VirtualBox application & head into the settings of the Ubuntu server VM. Navigate to Network in the Expert Tab, click 'Port Forwarding' on the VM associated adaptor, click 'Add new port forwarding rule', give it a relevant name e.g. SSH & in the protocol colomn, make sure TCP is selected. In host port & guest port, put '22' as port 22 is the default port assigned to SSH. Leave host IP & guest IP blank. <br>
 
-![PortForwarding](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20Port%20Forwarding.png)
+![PortForwarding](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20Port%20Forwarding.png) 
 
-### Remotely Connecting To The Server
+### *Remotely Connecting To The Server*
 
 - Open CMD on your PC (The Ubuntu server VM must still be running in the background) & in the command line, type 'ssh' followed by the username of the server account, the '@' symbol then either 'localhost'/'127.0.0.1'/the IP address of the server. It should look like one the following 3: 'ssh emre@localhost', 'ssh emre@127.0.0.1' or 'ssh emre@192.168.1.148'. <br>
 
 ![SSH-CMD](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20CMD%20Login.png)
+
+(As it will be your first time connecting to the server via SSH, you'll need to type 'yes' to accept the servers fingerprint). <br>
+
+- To log out from a remote session, type 'exit'. <br>
+
+- Connecting via SSH means you can carry out server tasks from any computer on the same network & if planning to run the server headless, now would be the time to disconnect the monitor and keyboard from the physical server. As I am running the server in a VM, I powered off the Ubuntu server in VirtualBox & selected the drop down next to start then clicked headless start. When the server went back online, I connected to the server via SSH in CMD. <br>
+
+![HeadlessStart](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Headless%20Start.png)
+
+## Installing A GUI
+
+- Adding a desktop environment to an Ubuntu server is optional. Keep in mind Ubuntu in its standard form uses far less resources than having a desktop bolted on. <br>
+
+- To keep the load down as much as possible, in this project, I installed a lightweight desktop environment known as LXDE (Lightweight X11 Desktop Environment). <br>
+
+### *Installation*
+
+- In the command line, type 'sudo apt install lxde-core lxappearance' then type 'y' to continue. ('lxde-core' will give a minimal desktop but adding 'lxappearance' will enable you to change the look & feel of the desktop if you wish to do so). <br>
+
+- If a window pops up saying to choose the default display manager (this will provide a graphical login window), to keep it lightweight, highlight 'lightdm' and hit enter. <br>
+
+- Once the installation is complete restart the server by typing 'sudo reboot'. Once restarted you will now see a graphical login window. <br>
+
+![GUI-Login-Window](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20GUI%20Login.png)
+
+- Before logging in, click the Ubuntu logo next to the display name & select 'LXDE'. <br>
+
+![LXDE-Login-Selection](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20GUI%20Login%20LXDE%201.png)
+
+- Log in using the same details as you normally use to log in on the CLI <br>
+
+- To use the CLI, open the LXTerminal application, here you can run commands as you normally would. LXTerminal can be found by opening the start menu > system tools > LXTerminal. <br>
+
+### *Customising The GUI*
+
+- To customize the GUI, click the logo in the bottom left > preferences > Customize Look and Feel. <br>
+
+![GUI-Customise](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20GUI%20Look%20%26%20Feel.png)
+
+### *Removing the GUI*
+
+- To remove the GUI, in the LXTerminal console type 'sudo apt-get remove xserver-xorg-core' hit enter, then type 'y' to continue. Once the command has run, reboot the server. <br>
+
+- (Note that for the following steps in my project, I will be running the server with no GUI). <br>
+
+## RDP (Remote Desktop Protocol)
+
+- In my project I will install XRDP on the server which will allow me to connect to the Ubuntu server from any windows PC on the same network using the 'Remote Desktop Connection' application.
+
+### *Installing XRDP*
+
+- First, in the CLI, type 'sudo apt install xrdp' then type 'y' to continue. Once installed the configuration files need to be edited. <br>
+
+- Type 'sudo nano /etc/xrdp/startwm.sh'. <br>
+
+![XRDP-Config-Before-Any-Edit](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Xrdp%20Config.png)
+
+- Comment out the 2 lines of code just like in the image below by typing '#' at the start of the line. Then Below these lines, create a new line by hitting the enter key, then type 'lxsession -s LXDE -e LXDE' (this line informs xrdp you're connecting to the LXDE desktop'  <br>
+
+![XRDP-Config-Newline](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Xrdp%20Config%20Comment%20%26%20New%20Line.png)
+
+- Save and exit this file by hitting CTRL+X, then typing 'y' and hitting enter. <br>
+
+### *SSL Cert Group*
+
+- Add the xrdp user to the SSL cert group (this needs to be done as Remote Desktop uses an encrypted connection). <br>
+
+- To do this, type 'sudo adduser xrdp ssl-cert' <br>
+
+![SSL-Cert](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Xrdp%20SSL%20Cert.png)
+
+- Restart the server to make sure the changes take effect by typing 'sudo reboot'. <br>
+
+### *Port Forwarding*
+
+- Before an RDP connection can be made, in VirtualBox, in the Ubuntu Server settings, allow port 3389 (Default Port used by the RDP) in port forwarding as previously done with port 22 for SSH. <br>
+
+![Port-Forwarding](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Xrdp%20Port%203389.png)
+
+### *Remote Destop Connection*
+
+- Now, on your windows PC, open 'Remote Desktop Connection' and type in either the IP address of the server, '127.0.0.1' or 'localhost' then click connect. <br>
+
+![Remote-Desktop-Connection](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Xrdp%20RDP%20Localhost.png)
+
+- You will be greeted with the xrdp login screen, enter the login details for your Ubuntu Server on the login window.
+
+![XRDP-Login-Screen](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Xrdp%20RDP%20Login%20Window.png)
+
+- Once logged in, you will now be remotely logged in to the Ubuntu server desktop (you can tell it's remotely logged in due to the blue bar at the top of the screen). <br>
+
+- To exit the remote connection, log out via the start menu or if you want to leave something running on the desktop, you can exit the session with the little cross in the blue bar & return to it later by accessing the server via the Remote Desktop Connection application. <br>
+
+
 
 
 
