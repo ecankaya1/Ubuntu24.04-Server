@@ -103,10 +103,11 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ![APTdirectory](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20APT%20directory.png)
 
-- 2 files that need to be edited in here, the first is '50unattended-upgrades'. <br>
-- Open this file in the nano text editor by typing 'sudo nano 50unattended-upgrades'. <br>
+- There are 2 files that need to be edited here. <br>
 
-### 3 parts to check in this file:
+### File 1:
+
+- The first file is '50unattended-upgrades'. Open this file in the nano text editor by typing 'sudo nano 50unattended-upgrades'. <br>
 
 - In the 'Allowed-Origins' section, check the 3 lines highlighted yellow in the image below aren't commented out. If they were, they would have 2 forward slashes at the start of the line '//', if that is the case, remove the forward slashes. Removing the forward slashes here means security updates will be applied automatically. <br>
 
@@ -125,6 +126,8 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 ![AutoTimeEdited](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Auto%20Reboot%20Time%20corrected.png)
 
 - To save these changes in nano editor, hit 'CTRL+X' then type 'y' & hit enter. <br>
+
+### File 2:
 
 - The second file to check is: '20auto-upgrades'. <br>
 
@@ -145,6 +148,43 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 ![UpgradesStatus](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Auto%20Update%20Status.png)
 
 ## Networking
+
+- To check the network connections on the server, type 'ip a'. The network adaptors mac address will be listed next to 'link/ether'. <br>
+
+- The network configuration for the server is stored in the '50-cloud-init.yaml' file, located in the '/etc/netplan/' directory. <br>
+
+- This can be opened by typing 'sudo nano /etc/netplan/50-cloud-init.yaml'. <br>
+
+- In this file. you can edit any addresses, settings, etc. <br>
+
+- If any changes were made in the file, after you save and exit, type 'sudo netplan apply'. <br>
+
+## Remote Access
+
+- To remotely access the server on your local network, SSH (Secure Shell) will need to be installed if not already done so. Type 'sudo apt install openssh-server' to check if it has been installed/already installed. <br>
+
+![SSH-Install](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20Install.png)
+
+- Next make sure OpenSSH client is installed on your PC. Do this by minimising the Ubuntu server VM & on your PC desktop, navigate to settings > system > optional features & check if OpenSSH client is installed. If not, click 'add features' & simply add it. <br>
+
+![OpenSSH-client](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20Windows11.png)
+
+### Port Forwarding
+
+- As I am using VirtualBox to run a VM of the Ubuntu server, some extra steps are needed. Open the VirtualBox application & head into the settings of the Ubuntu server VM. Navigate to Network in the Expert Tab, click 'Port Forwarding' on the VM associated adaptor, click 'Add new port forwarding rule', give it a relevant name e.g. SSH & in the protocol colomn, make sure TCP is selected. In host port & guest port, put '22' as port 22 is the default port assigned to SSH. Leave host IP & guest IP blank. <br>
+
+![PortForwarding](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20Port%20Forwarding.png)
+
+### Remotely Connecting To The Server
+
+- Open CMD on your PC (The Ubuntu server VM must still be running in the background) & in the command line, type 'ssh' followed by the username of the server account, the '@' symbol then either 'localhost'/'127.0.0.1'/the IP address of the server. It should look like one the following 3: 'ssh emre@localhost', 'ssh emre@127.0.0.1' or 'ssh emre@192.168.1.148'. <br>
+
+![SSH-CMD](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20SSH%20CMD%20Login.png)
+
+
+
+
+
 
 
 
