@@ -89,7 +89,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ## Automatic Updates
 
-- Rather than manually doing updates everytime, you can get the server to automatically do it for you. <br>
+- Rather than manually doing updates everytime, you can get the server to automatically do it. <br>
 - First, check the unattended upgrades package is installed by typing 'sudo apt install unattended-upgrades' (this package should be installed by default). <br>
 
 ![UnattendedUpgrades](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Automatic%20Updates.png)
@@ -125,6 +125,28 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 ![AutoTimeEdited](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Auto%20Reboot%20Time%20corrected.png)
 
 - To save these changes in nano editor, hit 'CTRL+X' then type 'y' & hit enter. <br>
+
+- The second file to check is: '20auto-upgrades'. <br>
+
+- Open it by typing 'sudo nano 20auto-upgrades'. <br>
+
+- In the image below, the first line makes sure that the software package lists are up to date so that the server gets the latest available packages whilst the second line enables the unattended upgrade itself. <br>
+
+![20AutoUpgrades](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%2020auto-upgrades.png)
+
+- The important thing to check in this file is that they're both set to the value of '1' (1 enables the entry & 0 disables the entry). <br>
+
+- Hit 'CTRL-X' to exit the file & if any changes were made, make sure to save. <br>
+
+- With unattended upgrades configured, restart the server by typing 'sudo reboot' so that the changes may take effect. <br>
+
+- Once rebooted, to check the automatic update service is working, type 'sudo systemctl status unattended-upgrades'. <br>
+
+![UpgradesStatus](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Auto%20Update%20Status.png)
+
+## Networking
+
+
 
 
 
