@@ -273,24 +273,153 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 - To exit the remote connection, log out via the start menu or if you want to leave something running on the desktop, you can exit the session with the little cross in the blue bar & return to it later by accessing the server via the Remote Desktop Connection application. <br>
 
+## Web Console
+
+- In this project, I installed a tool called cockpit. Cockpit is a web console that allows you to administrate the server through an easy to use interface. Once cockpit is installed you can access the Ubuntu server from any computer on the local network using a web browser. <br>
+
+### *Installation*
+
+- First, make sure the software package manager is up to date by typing 'sudo apt update'. <br>
+- Then install cockpit by typing 'sudo apt install cockpit'. <br>
+
+- Once installed, check cockpit is running by typing 'sudo systemctl status cockpit.socket'. <br>
+
+![Cockpit-Status](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Cockpit%20Status.png)
+
+### *Configuration*
+
+- Cockpits default configuration does not work with Ubuntus network manager, this can be fixed by typing 'sudo nano /etc/netplan/50-cloud-init.yaml'. Look for the line that says 'version: 2' and directly below it, type in 'renderer: NetworkManager', save it by hitting CTRL-X, typing 'y' then hit enter. <br>
+
+![Cockpit-Config](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Cockpit%20NetworkManager.png)
+
+- To make the new configuration take effect, type 'sudo netplan try' then hit enter to accept the new configuration. <br>
+
+- Type 'exit' and note that it now gives the address of the web console on login screen. (You will only see this if using ubuntu without a GUI). <br>
+
+![Web-Console-Address](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Cockpit%20Webconsole%20Login%20Page.png)
+
+### *Port Forwarding*
+
+- Before accessing cockpit on a web browser, first go to the Ubuntu server VM settings in VirtualBox & allow port 9090 in port forwarding as previously done with SSH & RDP. (Cockpit uses port 9090 by default for its web server component). <br>
+
+![Port-Forwarding-Cockpit](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Cockpit%20Port%209090.png)
+
+### *Accessing Cockpit*
+
+- On a your windows PC, go into a web browser & in the search bar type in the IP address of the server followed by a ':' and the port number '9090'. e.g. '192.168.0.200:9090' or using 'localhost:9090' or '127.0.0.1:9090'. <br>
+
+- Once searched, it will say 'Your connection is not private'. Since cockpit uses a self signed certificate, click on advanced then click proceed. <br>
+
+- Once on the login screen, type in your user details to log in. <br>
+
+![Cockpit-Login](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Cockpit%20Login%20Window.png)
+
+![Cockpit-Interface](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Cockpit%20Interface.png)
+
+- You are now able to manage the server, performing tasks such as updating software, managing users, and configuring networks without the need of commands. <br>
+
+## Adding New User Accounts
+
+- In the CLI, type 'sudo adduser new-username' (e.g. 'sudo adduser ecankaya'). <br>
+
+- Enter the password for the new user account. <br>
+
+- Enter the full name of the new user (alternatively you can just hit enter to accept the default) <br>
+
+- Fill in the room number, work phone, home phone, & other with whatever you wish then type 'y' to say the information is correct.<br>
+
+![Add-User-Details](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Adding%20New%20User.png)
+
+- Go to the home directory by typing 'cd /home' and list the contents by typing 'ls', you will see the new account will have its own home directory. <br>
+
+![Add-User-LS](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Adding%20New%20User%20LS.png)
+
+## Adding Administrative Priveleges To User Accounts
+
+- To elevate an account to administrator, it needs to be added to the sudo (SuperUserDO) group. <br>
+
+- In the home directory, type 'sudo usermod -a -G sudo account-username' (e.g. 'sudo usermod -a -G sudo ecankaya'). The account will now be an admin account. Test this by logging into the account and run an admin task. <br>
+
+- I logged into the new admin account via SSH from my windows terminal then run the command 'sudo apt update', the command executed successfully. <br>
+
+![Admin-Account-Command](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Admin%20Privileges.png)
+
+## Switching Users
+
+- Rather than logging out and logging into another account, you can switch accounts. <br>
+
+- In the command line, type 'su - username' (e.g. 'su - ecankaya'). Then enter the password for the account. (You can tell you've switched users as the command prompt will be different or you can confirm this by typing the 'whoami' command). <br>
+
+- Type 'exit' to leave the account. <br>
+
+![Switching-Users](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Switching%20User.png)
+
+## Listing User Accounts
+
+- To list all the user accounts on the server, type 'compgen -u'. <br>
+
+- There will be a lot of system accounts listed, but here you will be able to find any accounts you have created. <br>
+
+## Removing A User Account
+
+- To remove a user account, type 'sudo deluser account-username' (e.g. 'sudo deluser ecankaya'). <br>
+
+- Check it has been removed by typing the 'compgen -u' command. <br>
+
+![Removing-User](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Removing%20A%20User.png)
+
+## Root Account
+
+- In Linux, "root" is the name of the superuser which is a special account for system administration. Switching to this account can be useful if you have to type a lot of admin commands, one after the other as it saves you from having to type 'sudo' each time. <br>
+
+- Do this by typing 'sudo su -' (The dash at the end of the command, isn't necessary, but it enters you into the "root" accounts home directory). <br>
+
+- Type 'exit' to leave the "root" account. <br>
+
+![Switch-Root](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main/Images)
+
+## Enabling The Root Account
+
+- For security reasons, by default, Ubuntu Server doesn't allow you to login using the "root" account. This is a good security feature, however there may be times when setting up a server, you need the root account to be fully active. <br>
+
+- Type 'sudo passwd root' and create the password for the root account. <br>
+
+- Log out of your account by typing 'gnome-session-quit' then log into the root account using 'root' as the username & the password you set for it. (Whenever you're running as root, the '$' in the command prompt changes to the '#') <br>
+
+![Root-Login](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Root%20Access%20Enable.png)
+
+## Disabling The Root Account
+
+- To remove login access with the root account. <br>
+
+- In the server console type, 'sudo passwd -l root'. <br>
+
+- The root account login will now be disabled. <br>
+
+![Root-Disable](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Root%20Access%20Disable.png)
 
 
+## Changing The Hostname
 
+- You can see the servers hostname by typing 'hostname' in console. For even more info, type 'hostnamectl'. <br>
 
+![Hostnamectl](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Hostnamectl.png)
 
+- To change the hostname type 'sudo hostnamectl set-hostname new-name' (e.g. 'sudo hostnamectl set-hostname projectserver'). Type 'hostname' to see the servers new name. <br>
 
+![Hostname-Change](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Hostname%20Change.png)
 
+- You will notice the command prompt hasn't updated with the new host name, fix this by typing 'exec bash'. <br>
 
+![Exec-Bash](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Hostname%20Update.png)
 
+As the server boots it maps local hostnames to IP addresses. These are stored in the '/etc/hosts' file. They can be viewed by typing  'cat /etc/hosts'. <br>
 
+![View-Hosts](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Hostname%20cat.png)
 
+- Here you will it still contains the oldname of the server. Update this by typing 'sudo nano /etc/hosts'. Navigate to where your old server name is, delete it with backspace then type in your new server name. Save the file, by hitting CTRL+X, typing 'y' then hitting enter. <br>
 
-
-
-
-
-
- 
+- To check the server knows its name, run a ping test using the hostname  e.g. 'ping projectserver'. Hit CTRL+C to cancel the ping. <br>
 
 
 
