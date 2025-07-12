@@ -398,7 +398,6 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ![Root-Disable](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Root%20Access%20Disable.png)
 
-
 ## Changing The Hostname
 
 - You can see the servers hostname by typing 'hostname' in console. For even more info, type 'hostnamectl'. <br>
@@ -596,6 +595,38 @@ As the server boots it maps local hostnames to IP addresses. These are stored in
 Save this file using CTRL+X, typing 'y' then hitting enter.
 
 To test the new entry works correctly (an error in the fstab file can prevent the server from starting), type 'sudo mount -a'. Running that command has mounted any drives listed in the 'fstab' file. From now on, this will be done whenever the server boots.
+
+## File Permissions
+
+- Typing 'ls -l' will give more info on the listings within the current directory. In the image below you will see everything in the directory is owned by 'root', that's why you constantly have to use the 'sudo' command (accessing data owned by 'root' required sudo privileges). <br>
+
+![File-Permissions-LS](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20File%20Permissions%20LS%20-L.png)
+
+- To own these, go into the parent directory by typing 'cd ..' then type 'sudo chown -R username directory/'. Go back into the directory you changed the permissions of, list the contents again with 'ls -l', you will now see that you own the files within the given directory. <br>
+
+![File-Permissions-CHOWN](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20File%20Permissions%20CHOWN.png)
+
+## User Access
+
+- The letters and dashes in the image below visually identify a files permissions and are arranged as: <br>
+
+OWNER      GROUP      OTHERS <br>
+----           ---            ---  <br>
+
+![User-Access-File-Permissions](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20User%20Access.png)
+
+
+The test file in the image shown has read/write assigned to the owner and read permission assigned to both group & others. ('r' stands for read, 'w' stands for write, 'x' stands for execute).
+
+While you can change permissions for an individual file, it's more realistic to change an entire directory. Do this by returning to the parent directory using 'cd ..' then type 'sudo chmod -R 750 directory/'
+
+These numbers represent the OWNER/GROUP/OTHERS respectively as is known as Octal Notation.
+
+Go back into the directory of you changed user access in, type 'ls -l'. You can now see that the permissions have changed to what you set it as.
+
+
+
+
 
 
 
