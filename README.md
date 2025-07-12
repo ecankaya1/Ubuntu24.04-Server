@@ -608,21 +608,108 @@ To test the new entry works correctly (an error in the fstab file can prevent th
 
 ## User Access
 
-- The letters and dashes in the image below visually identify a files permissions and are arranged as: <br>
+- The letters and dashes highlighted in the image below visually identify a files permissions & are arranged as: <br>
 
-OWNER      GROUP      OTHERS <br>
-----           ---            ---  <br>
+![User-Access-RWX](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20User%20Access%20File%20Permissions.png)
 
 ![User-Access-File-Permissions](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20User%20Access.png)
 
+- The test file in the image shown has read/write assigned to the owner & read assigned to both group & others. ('r' stands for read, 'w' stands for write, 'x' stands for execute). <br>
 
-The test file in the image shown has read/write assigned to the owner and read permission assigned to both group & others. ('r' stands for read, 'w' stands for write, 'x' stands for execute).
+- While you can change permissions for an individual file, it's more realistic to change the permissions for an entire directory. Do this by returning to the parent directory using 'cd ..' then type 'sudo chmod -R 750 directory/'. The '750' in the command represents the octal notation of read/write/execute. <br>
 
-While you can change permissions for an individual file, it's more realistic to change an entire directory. Do this by returning to the parent directory using 'cd ..' then type 'sudo chmod -R 750 directory/'
+![User-Access-chmod](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20User%20Access%20Changed%20Perms.png)
 
-These numbers represent the OWNER/GROUP/OTHERS respectively as is known as Octal Notation.
+- The numbers shown in the image below represent the OWNER/GROUP/OTHERS respectively which is known as Octal Notation. <br>
 
-Go back into the directory of you changed user access in, type 'ls -l'. You can now see that the permissions have changed to what you set it as.
+![Octal-Notation](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20User%20Access%20Octal%20Notation.png)
+
+- Go back into the directory which you changed user access in, type 'ls -l'. You can now see that the permissions have changed to what you set it as. <br>
+
+## File Sharing
+
+- There are a few ways to share files over a network, e.g. NFS & SFTP. In this project I used a software called Samba (which uses SMB & CIFS protocol). <br>
+
+### *Samba*
+
+- Firstly before installing Samba, check the package manager is up to date using 'sudo apt update'. <br>
+
+- Install Samba by typing 'sudo apt install samba'. <br>
+
+- With the software installed, it now needs to be configured. <br>
+
+### *Adding A Samba User*
+
+- Use an existing account on the server & add it to samba by typing 'sudo smbpasswd -a username' & give it a password of your choosing. <br>
+
+![Adding-A-Samba-User](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Samba%20New%20User.png)
+
+### *Creating A Samba Share*
+
+- Go into the samba directory by typing 'cd /etc/samba'. <br>
+
+- In here you're going to edit the 'smb.conf' file but before that happens, make a backup just in case by typing 'sudo cp smb.conf smb.bk'. <br>
+
+- Edit the 'smb.conf' file by typing 'sudo nano smb.conf' & jump to the end of the file by hitting CTRL+END. Here you will type in something similar to the image below. <br>
+
+![Samba-sbm.conf](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Samba%20Share.png)
+
+- The '#' line is a comment on what the code does. <br>
+- The '[share]' line is the name of the share. <br>
+- The 'path = /mnt/drive2' line is the path to the directory which is going to be shared on the network. <br>
+- The 'valid users = emre' line is the username of the samba account that we want added to the share. <br>
+- The 'read only = no' line is whether the user can write on the drive, if you want the user to be able to write, type 'no'. <br>
+
+- To save hit CTRL+X, type 'y' then hit enter. <br>
+
+- With the configuration saved, the samba service needs to be restarted for it to take effect. Do this by typing 'sudo systemctl restart smbd.service'. <br>
+
+- Check the samba configuration for errors by typing 'testparm'. <br>
+
+![Samba-Testparm](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Samba%20Testparm.png)
+
+- Hit enter and you will see the samba share that was created at the bottom. <br>
+
+![Samba-Testparm-Dump](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Samba%20Testparm%20Dump.png)
+
+### *Accessing The Network Files On Windows*
+
+- On a windows PC, go into file explorer & in the address bar type '\\server-ip-address\share-name' (e.g. \\192.168.1.148\share). <br>
+
+![Samba-Address-Bar](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Samba%20Windows%20Access.png)
+
+- A login box will pop up, put in the username & password of the samba account & you will now have access to the shared drive from a windows PC. <br>
+
+![Samba-Windows-Login](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Samba%20Windows%20Access%20Files.png)
+
+## UFW (Uncomplicated Firewall)
+
+- Ubuntu servers come with a built in firewall but by default it is turned off, this can be seen by typing 'sudo ufw status' <br>
+
+![UFW-Status](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20UFW%20Status.png)
+
+- Before turning the firewall on, be careful if you're logged into the server remotely as you can lock yourself out. (This is because by default the firewall will only allow outgoing traffic). <br>
+
+- To overcomes this, ensure SSH access is allowed by adding a firewall rule. <br>
+
+### *Firewall Rules*
+
+- To allow ssh access through the firewall, type 'sudo ufw allow ssh'. <br>
+
+- With that done, turn on the firewall by typing 'sudo ufw enable'. (Test this by going over to CMD on a windows PC and log into the server via ssh). <br>
+
+![UFW-Allow-SSH](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20UFW%20SSH%20Rule%20And%20Enable.png)
+
+- You can also remove ssh access by typing 'sudo ssh deny ssh'. <br>
+
+With an active firewall you need to think about all the connections to the server even on your local network. For example if network share is set up with samba, you need a firewall rule to allow Samba. <br>
+
+- This can be overcome by typing 'sudo ufw allow samba', now you will able to access server files from a windows PC. <br>
+
+- If you want to disable the firewall by typing 'sudo ufw disbale'. <br>
+
+
+
 
 
 
