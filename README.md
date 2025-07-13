@@ -2,6 +2,13 @@
 ### This project simulates a Ubuntu 24.04 Server in a virtualised environment using VirtualBox. This lab builds foundational skills in Linux OS & networking.
 <br>
 
+## Table Of Contents:
+1. <a href="https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main#objective">Objective</a>
+2. <a href="https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#skills-learned">Skills Learned</a>
+3. <a href="https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#tools-used">Tools Used</a>
+
+
+
 ## Objective
 This project was created to simulate a basic Ubuntu 24.04 Server in VirtualBox. The goal was to gain a deeper understanding on Linux Systems, the CLI, & basic Linux server setup. By building this lab from the ground up, I aimed to gain hands-on experience with Linux systems & more confidence using the CLI as Linux is a dominant operating system in the server landscape.
 
@@ -23,12 +30,6 @@ This project was created to simulate a basic Ubuntu 24.04 Server in VirtualBox. 
 - APT (Advanced Package Tool) – Package manager used for installing and managing software on Ubuntu. <br>
 - Netplan – Network configuration utility for setting up IP addresses and DNS. <br>  
 - nano – Command-line text editors used to edit configuration files. <br>
-
-## Table Of Contents:
-1. [VM Installation](#VM Installation)
-2. [VirtualBox Server Setup](#VirtualBox Server Setup)
-
-# Steps
 
 ## VM Installation
 
