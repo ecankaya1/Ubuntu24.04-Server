@@ -48,6 +48,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 ## Ubuntu Server Setup
 
 - Go through the Ubuntu server setup, selecting language and keyboard layout. <br>
+
 - On the network connections config, here you can manually assign a static IPv4 address by selecting 'Edit IPv4' & change Automatic(DHCP) to Manual. <br>
 
 ![IPv4 Config](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20IPv4%20Config.png)
@@ -89,7 +90,8 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ## Automatic Updates
 
-- Rather than manually doing updates everytime, you can get the server to automatically do it. <br>
+Rather than manually doing updates everytime, you can get the server to automatically do it. <br>
+
 - First, check the unattended upgrades package is installed by typing 'sudo apt install unattended-upgrades' (this package should be installed by default). <br>
 
 ![UnattendedUpgrades](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Automatic%20Updates.png)
@@ -99,11 +101,12 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 ![UpdateNotifierCommon](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Automatic%20Updates%20Auto%20Restart.png)
 
 - Next, check the configuration in the APT's config directory. (Advanced Package Tool is a tool for handling the installation & removal of software). do this by typing 'cd /etc/apt/apt.conf.d'. (You can see that you're in the APT directory as the command prompt has changed). <br>
+
 - List the contents of the directory by typing 'ls'. <br>
 
 ![APTdirectory](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20APT%20directory.png)
 
-- There are 2 files that need to be edited here. <br>
+There are 2 files that need to be edited here: <br>
 
 ### *File 1:*
 
@@ -185,15 +188,15 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 - To log out from a remote session, type 'exit'. <br>
 
-- Connecting via SSH means you can carry out server tasks from any computer on the same network & if planning to run the server headless, now would be the time to disconnect the monitor and keyboard from the physical server. As I am running the server in a VM, I powered off the Ubuntu server in VirtualBox & selected the drop down next to start then clicked headless start. When the server went back online, I connected to the server via SSH in CMD. <br>
+Connecting via SSH means you can carry out server tasks from any computer on the same network & if planning to run the server headless, now would be the time to disconnect the monitor and keyboard from the physical server. As I am running the server in a VM, I powered off the Ubuntu server in VirtualBox & selected the drop down next to start then clicked headless start. When the server went back online, I connected to the server via SSH in CMD. <br>
 
 ![HeadlessStart](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Headless%20Start.png)
 
 ## Installing A GUI
 
-- Adding a desktop environment to an Ubuntu server is optional. Keep in mind Ubuntu in its standard form uses far less resources than having a desktop bolted on. <br>
+Adding a desktop environment to an Ubuntu server is optional. Keep in mind Ubuntu in its standard form uses far less resources than having a desktop bolted on. <br>
 
-- To keep the load down as much as possible, in this project, I installed a lightweight desktop environment known as LXDE (Lightweight X11 Desktop Environment). <br>
+To keep the load down as much as possible, in this project, I installed a lightweight desktop environment known as LXDE (Lightweight X11 Desktop Environment). <br>
 
 ### *Installation*
 
@@ -223,11 +226,11 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 - To remove the GUI, in the LXTerminal console type 'sudo apt-get remove xserver-xorg-core' hit enter, then type 'y' to continue. Once the command has run, reboot the server. <br>
 
-- (Note that for the following steps in my project, I will be running the server with no GUI). <br>
+(Note that for the following steps in my project, all commands will be executed from the CLI). <br>
 
 ## RDP (Remote Desktop Protocol)
 
-- In my project I will install XRDP on the server which will allow me to connect to the Ubuntu server from any windows PC on the same network using the 'Remote Desktop Connection' application.
+In my project I will install XRDP on the server which will allow me to connect to the Ubuntu server from any windows PC on the same network using the 'Remote Desktop Connection' application.
 
 ### *Installing XRDP*
 
@@ -245,7 +248,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ### *SSL Cert Group*
 
-- Add the xrdp user to the SSL cert group (this needs to be done as Remote Desktop uses an encrypted connection). <br>
+The xrdp user needs to be the SSL cert group. (This has to be done as Remote Desktop uses an encrypted connection). <br>
 
 - To do this, type 'sudo adduser xrdp ssl-cert' <br>
 
@@ -275,7 +278,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ## Web Console
 
-- In this project, I installed a tool called cockpit. Cockpit is a web console that allows you to administrate the server through an easy to use interface. Once cockpit is installed you can access the Ubuntu server from any computer on the local network using a web browser. <br>
+In this project, I installed a tool called cockpit. Cockpit is a web console that allows you to administrate the server through an easy to use interface. Once cockpit is installed you can access the Ubuntu server from any computer on the local network using a web browser. <br>
 
 ### *Installation*
 
@@ -336,17 +339,17 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ## Adding Administrative Priveleges To User Accounts
 
-- To elevate an account to administrator, it needs to be added to the sudo (SuperUserDO) group. <br>
+To elevate an account to administrator, it needs to be added to the sudo (SuperUserDO) group. <br>
 
 - In the home directory, type 'sudo usermod -a -G sudo account-username' (e.g. 'sudo usermod -a -G sudo ecankaya'). The account will now be an admin account. Test this by logging into the account and run an admin task. <br>
 
-- I logged into the new admin account via SSH from my windows terminal then run the command 'sudo apt update', the command executed successfully. <br>
+- Log into the new admin account via SSH from a windows terminal then run the command 'sudo apt update', you will see the command execute successfully. <br>
 
 ![Admin-Account-Command](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Admin%20Privileges.png)
 
 ## Switching Users
 
-- Rather than logging out and logging into another account, you can switch accounts. <br>
+Rather than logging out and logging into another account, you can switch accounts. <br>
 
 - In the command line, type 'su - username' (e.g. 'su - ecankaya'). Then enter the password for the account. (You can tell you've switched users as the command prompt will be different or you can confirm this by typing the 'whoami' command). <br>
 
@@ -370,7 +373,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ## Root Account
 
-- In Linux, "root" is the name of the superuser which is a special account for system administration. Switching to this account can be useful if you have to type a lot of admin commands, one after the other as it saves you from having to type 'sudo' each time. <br>
+In Linux, "root" is the name of the superuser which is a special account for system administration. Switching to this account can be useful if you have to type a lot of admin commands, one after the other as it saves you from having to type 'sudo' each time. <br>
 
 - Do this by typing 'sudo su -' (The dash at the end of the command, isn't necessary, but it enters you into the "root" accounts home directory). <br>
 
@@ -380,7 +383,7 @@ Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
 ## Enabling The Root Account
 
-- For security reasons, by default, Ubuntu Server doesn't allow you to login using the "root" account. This is a good security feature, however there may be times when setting up a server, you need the root account to be fully active. <br>
+For security reasons, by default, Ubuntu Server doesn't allow you to login using the "root" account. This is a good security feature, however there may be times when setting up a server, you need the root account to be fully active. <br>
 
 - Type 'sudo passwd root' and create the password for the root account. <br>
 
@@ -422,7 +425,7 @@ As the server boots it maps local hostnames to IP addresses. These are stored in
 
 ## Tasksel
 
-- Tasksel is a useful tool that can be added to Ubuntu servers that makee installing popular packages easier. <br>
+Tasksel is a useful tool that can be added to Ubuntu servers that makee installing popular packages easier. <br>
 
 ### *Installation*
 
@@ -438,7 +441,7 @@ As the server boots it maps local hostnames to IP addresses. These are stored in
 
 ## LAMP Stack
 
-- A lamp stack consists of a bundle of open source software used for running web applications. (LAMP is an acronym that stands for Linux, Apache, MySQL, PHP). <br>
+A lamp stack consists of a bundle of open source software used for running web applications. (LAMP is an acronym that stands for Linux, Apache, MySQL, PHP). <br>
 
 ### *Installation*
 
@@ -508,7 +511,7 @@ As the server boots it maps local hostnames to IP addresses. These are stored in
 
 - Now if you go back to the web browser and refresh the phpinfo page, you will see the information is gone. <br>
 
-- Note that to make proper use of the LAMP stack you'll need additional software, what software you use is entirely up to the user but with everything that was just installed, all the groundwork is in place. Many popular open source projects make use of the LAMP stack, including Nextcloud & WordPress. <br>
+Note that to make proper use of the LAMP stack you'll need additional software, what software you use is entirely up to the user but with everything that was just installed, all the groundwork is in place. Many popular open source projects make use of the LAMP stack, including Nextcloud & WordPress. <br>
 
 ## Drives
 
@@ -528,7 +531,7 @@ As the server boots it maps local hostnames to IP addresses. These are stored in
 
 ### *Partition The Drive*
 
-- As it is a server, it is likely that a large drive is going to be used for storing data. For that reason the 'gdisk' command should be used to partition the drive, as this will create a GPT (GUID Partition Table) that is better suited to bigger drives. <br>
+As it is a server, it is likely that a large drive is going to be used for storing data. For that reason the 'gdisk' command should be used to partition the drive, as this will create a GPT (GUID Partition Table) that is better suited to bigger drives. <br>
 
 - Type 'sudo gdisk /disk/path' (e.g. 'sudo gdisk /dev/sda). Then go through the steps as followed: <br>
 
@@ -554,7 +557,7 @@ As the server boots it maps local hostnames to IP addresses. These are stored in
 
 ### *Mount The Drive*
 
-- Unlike windows, Linux doesn't use drive letters like C Drive or D Drive, instead the OS is located in the root directory, when an additional drive is added to make it accessable, it needs to be mounted within the root directory. There is an '/mnt' (mount) folder for just this purpose. <br>
+Unlike windows, Linux doesn't use drive letters like C Drive or D Drive, instead the OS is located in the root directory, when an additional drive is added to make it accessable, it needs to be mounted within the root directory. There is an '/mnt' (mount) folder for just this purpose. <br>
 
 - Navigate to the mount folder by typing 'cd /mnt'. <br>
 
@@ -578,7 +581,7 @@ As the server boots it maps local hostnames to IP addresses. These are stored in
 
 ![Drive-Mount-Steps](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Drive%20Mount.png)
 
-- When you mount the drive, you could use its dev path & partition number e.g. '/dev/sda1'. The issue with this method is that if at some point the server gets taken apart & the disks get moved around, there's no guarantee when you put the server back together, the drives would get the same label. A much more reliable way is to use UUID. <br>
+When you mount the drive, you could use its dev path & partition number e.g. '/dev/sda1'. The issue with this method is that if at some point the server gets taken apart & the disks get moved around, there's no guarantee when you put the server back together, the drives would get the same label. A much more reliable way is to use UUID. <br>
 
 ### *UUID (Universally Unique Identifier)*
 
@@ -620,7 +623,7 @@ To test the new entry works correctly (an error in the fstab file can prevent th
 
 ![User-Access-chmod](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20User%20Access%20Changed%20Perms.png)
 
-- The numbers shown in the image below represent the OWNER/GROUP/OTHERS respectively which is known as Octal Notation. <br>
+The numbers shown in the image below represent the OWNER/GROUP/OTHERS respectively which is known as Octal Notation. <br>
 
 ![Octal-Notation](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20User%20Access%20Octal%20Notation.png)
 
@@ -628,7 +631,7 @@ To test the new entry works correctly (an error in the fstab file can prevent th
 
 ## File Sharing
 
-- There are a few ways to share files over a network, e.g. NFS & SFTP. In this project I used a software called Samba (which uses SMB & CIFS protocol). <br>
+There are a few ways to share files over a network, e.g. NFS & SFTP. In this project I used a software called Samba (which uses SMB & CIFS protocol). <br>
 
 ### *Samba*
 
@@ -684,13 +687,13 @@ To test the new entry works correctly (an error in the fstab file can prevent th
 
 ## UFW (Uncomplicated Firewall)
 
-- Ubuntu servers come with a built in firewall but by default it is turned off, this can be seen by typing 'sudo ufw status' <br>
+Ubuntu servers come with a built in firewall but by default it is turned off, this can be seen by typing 'sudo ufw status' <br>
 
 ![UFW-Status](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20UFW%20Status.png)
 
-- Before turning the firewall on, be careful if you're logged into the server remotely as you can lock yourself out. (This is because by default the firewall will only allow outgoing traffic). <br>
+Before turning the firewall on, be careful if you're logged into the server remotely as you can lock yourself out. (This is because by default the firewall will only allow outgoing traffic). <br>
 
-- To overcomes this, ensure SSH access is allowed by adding a firewall rule. <br>
+To overcomes this, ensure SSH access is allowed by adding a firewall rule. <br>
 
 ### *Firewall Rules*
 
