@@ -24,6 +24,10 @@ This project was created to simulate a basic Ubuntu 24.04 Server in VirtualBox. 
 - Netplan – Network configuration utility for setting up IP addresses and DNS. <br>  
 - nano – Command-line text editors used to edit configuration files. <br>
 
+## Table Of Contents:
+1. [VM Installation](#VM Installation)
+2. [VirtualBox Server Setup](#VirtualBox Server Setup)
+
 # Steps
 
 ## VM Installation
@@ -36,7 +40,7 @@ Navigate to https://www.virtualbox.org/wiki/Downloads, download the compatible v
 
 Navigate to https://ubuntu.com/download/server#manual-install, and install.
 
-## Setting up the server on VirtualBox
+## VirtualBox Server Setup
 
 - Open VirtualBox. <br>
 - Select NEW.<br>
