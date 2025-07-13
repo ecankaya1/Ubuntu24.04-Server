@@ -28,7 +28,7 @@
 - [Tasksel](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#tasksel)
 - [LAMP Stack](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#lamp-stack)
 - [Drives](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#drives)
-- [File Permissions]https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#file-permissions()
+- [File Permissions](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#file-permissions)
 - [User Access](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#user-access)
 - [File Sharing](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#file-sharing)
 - [UFW](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#ufw-uncomplicated-firewall)
