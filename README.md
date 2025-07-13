@@ -709,7 +709,45 @@ With an active firewall you need to think about all the connections to the serve
 
 - This can be overcome by typing 'sudo ufw allow samba', now you will able to access server files from a windows PC. <br>
 
-- If you want to disable the firewall by typing 'sudo ufw disbale'. <br>
+- To disable a firewall, type 'sudo ufw disbale'. <br>
+
+## Netstat
+
+The whole point of a server is to surf services over a network, so it can be useful to get to know the 'netstat' command as this displays information about network connections. <br>
+
+- Install the netstat command by typing 'sudo apt install net-tools'. <br>
+
+- Now run the command 'sudo netstat -tulpn'. The '-tulpn' is a set of command line options that displays extra info: <br>
+
+![Netstat-Command](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Netstat%20Command.png)
+
+- -t (show only TCP connections). <br>
+- -u (show only UDP connections). <br>
+- -l (show only listening sockets). <br>
+- -p (show numerical addresses instead of trying to determine host, port or usernames). <br.
+- -n (show the PID & program name to which each socket belongs). <br>
+
+In the image below, you can see it is showing that it is using the samba service with '1018/smbd', it is using the TCP protocol & operating on port 139 '0.0.0.0:139' & it is also in a listening state meaning it is ready to be connected to. <br>
+
+![Netstat-Samba](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Netstat%20Details.png)
+
+## Monitoring Service Resources
+
+Typing in the 'top' command will show what processes are running on the server. This is useful to see what is using up the servers resources. Press 'q' to quit out of top. <br>
+
+![Top-Command](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Top%20Command.png)
+
+Typing 'htop' is a more powerful version of the 'top' command. It is interactive & you can analyse information more closely. 
+
+![HTop-Command](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Htop%20Command.png)
+
+For example if you want to search for processes connected with samba, press the 'F3' key & type in 'smb' it will highlight a running process that meets that criteria. You can then cycle through all smb processes by hitting the 'F3' key. You can also kill processes by highlighting a specific process with arrow keys & hitting the 'F9' key then hitting enter. <br>
+
+![HTop-Samba-Command](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Htop%20F3%20Search.png)
+
+
+
+
 
 
 
