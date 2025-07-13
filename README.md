@@ -3,10 +3,18 @@
 <br>
 
 ## Table Of Contents:
-1. <a href="https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main#objective">Objective</a>
-2. <a href="https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#skills-learned">Skills Learned</a>
-3. <a href="https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#tools-used">Tools Used</a>
-
+- [Objective](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#objective)
+- [Skills Learned](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#skills-learned)
+- [Tools Used](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#tools-used)
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
 
 
 ## Objective
