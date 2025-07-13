@@ -6,15 +6,35 @@
 - [Objective](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#objective)
 - [Skills Learned](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#skills-learned)
 - [Tools Used](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#tools-used)
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
+- [VM Installation](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#vm-installation)
+- [VirtualBox Server Setup](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#virtualbox-server-setup)
+- [Ubuntu Server Setup](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#ubuntu-server-setup)
+- [Updates](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#updates)
+- [Automatic Updates](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#automatic-updates)
+- [Networking](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#networking)
+- [Remote Access](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#remote-access)
+- [Installing A GUI](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#installing-a-gui)
+- [RDP](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#rdp-remote-desktop-protocol)
+- [Web Console](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#web-console)
+- [Adding New User Accounts](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#adding-new-user-accounts)
+- [Adding Administrative Privileges To User Accounts](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#adding-administrative-priveleges-to-user-accounts)
+- [Switching Users](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#switching-users)
+- [Listing User Accounts](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#listing-user-accounts)
+- [Removing A User Account](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#removing-a-user-account)
+- [Root Account](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#root-account)
+- [Enabling The Root Account](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#enabling-the-root-account)
+- [Disabling The Root Account](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#disabling-the-root-account)
+- [Changing The Hostname](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#changing-the-hostname)
+- [Tasksel](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#tasksel)
+- [LAMP Stack](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#lamp-stack)
+- [Drives](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#drives)
+- [File Permissions]https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#file-permissions()
+- [User Access](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#user-access)
+- [File Sharing](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#file-sharing)
+- [UFW](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#ufw-uncomplicated-firewall)
+- [Netstat](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#netstat)
+- [Monitoring Server Resources](https://github.com/ecankaya1/Ubuntu24.04-Server/tree/main?tab=readme-ov-file#monitoring-service-resources)
+
 
 
 ## Objective
@@ -350,7 +370,7 @@ In this project, I installed a tool called cockpit. Cockpit is a web console tha
 
 ![Add-User-LS](https://github.com/ecankaya1/Ubuntu24.04-Server/blob/main/Images/Ubuntu%20Adding%20New%20User%20LS.png)
 
-## Adding Administrative Priveleges To User Accounts
+## Adding Administrative Privileges To User Accounts
 
 To elevate an account to administrator, it needs to be added to the sudo (SuperUserDO) group. <br>
 
