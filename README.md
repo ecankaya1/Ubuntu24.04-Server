@@ -51,7 +51,7 @@ This project was created to simulate a basic Ubuntu 24.04 Server in VirtualBox. 
 
 ## Tools Used
 - VirtualBox – Virtualization platform used to run Ubuntu 24.04 server as a guest OS. <br>
-- Ubuntu Server 22.04 – Lightweight and stable Linux distribution used for server configuration. <br>
+- Ubuntu Server 24.04 – Lightweight and stable Linux distribution used for server configuration. <br>
 - Terminal / Shell (Bash) – Primary interface for interacting with the server environment. <br>
 - SSH – Secure remote access and management of the virtual server. <br>
 - UFW (Uncomplicated Firewall) – Simple firewall tool used to manage and configure basic network security. <br>
