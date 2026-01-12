@@ -1,5 +1,5 @@
 # Ubuntu 24.04 Server Project
-### This project simulates a Ubuntu 24.04 Server in a virtualised environment using VirtualBox. This lab builds foundational skills in Linux OS & networking.
+### This project simulates an Ubuntu 24.04 Server in a virtualised environment using VirtualBox. This lab builds foundational skills in Linux OS & networking.
 <br>
 
 ## Table Of Contents:
